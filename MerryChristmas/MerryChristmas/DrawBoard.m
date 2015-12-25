@@ -45,11 +45,11 @@ const float  kRadius = 100.;
     
     //layer
     pathLayer = [CAShapeLayer layer];
-    pathLayer.frame =CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT/2);
+    pathLayer.frame =CGRectMake(0, 30, SCREEN_WIDTH, SCREEN_HEIGHT/2 - 30);
     pathLayer.bounds = CGPathGetBoundingBox(path.CGPath);
     pathLayer.strokeColor = [[UIColor yellowColor] CGColor];
     pathLayer.fillColor = [[UIColor clearColor] CGColor];
-    pathLayer.lineWidth = 1.0f;
+    pathLayer.lineWidth = 2.0f;
     pathLayer.path = path.CGPath;
     [view.layer addSublayer:pathLayer];
     
@@ -135,6 +135,11 @@ const float  kRadius = 100.;
 
     pathLayer.fillColor = [COLOR(254, 67, 101) CGColor];
     layer2.fillColor = [COLOR(254, 67, 101) CGColor];
+    
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(finishAA)]) {
+        [self.delegate finishAA];
+    }
 }
 
 
@@ -145,6 +150,11 @@ const float  kRadius = 100.;
                                       startAngle:s
                                         endAngle:s + M_PI_2
                                        clockwise:YES];
+}
+
+- (void)changeTheFlower:(UIColor *)color{
+
+    pathLayer.fillColor = [color CGColor];
 }
 
 @end

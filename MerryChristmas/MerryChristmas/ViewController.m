@@ -9,7 +9,14 @@
 #import "ViewController.h"
 #import "DrawBoard.h"
 
-@interface ViewController ()
+@interface ViewController ()<finishDelegate>{
+
+    DrawBoard *db;
+    __weak IBOutlet UISlider *r;
+    __weak IBOutlet UISlider *g;
+    __weak IBOutlet UISlider *b;
+}
+- (IBAction)changeSS:(UISlider *)sender;
 
 @end
 
@@ -18,15 +25,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    DrawBoard *db = [DrawBoard new];
+    db = [DrawBoard new];
+    db.delegate = self;
     [db showTheFlowerOnView:self.view];
+    [db showTheWordOnView:self.view];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [db showTheWordOnView:self.view];
-    });
+    r.enabled = NO;
+    g.enabled = NO;
+    b.enabled = NO;
     
 }
 
+-(void)finishAA{
+
+    r.enabled = YES;
+    g.enabled = YES;
+    b.enabled = YES;
+}
 
 
+- (IBAction)changeSS:(UISlider *)sender {
+    
+    
+    
+    
+    [db changeTheFlower:[UIColor colorWithRed:r.value/255. green:g.value/255. blue:b.value/255. alpha:1.]];
+    
+    
+}
 @end

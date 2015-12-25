@@ -9,7 +9,20 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
-@interface DrawBoard : CALayer
+
+@protocol finishDelegate <NSObject>
+
+-(void)finishAA;
+
+@end
+
+
+@interface DrawBoard : NSObject
+
+
+
+@property (nonatomic, assign)id <finishDelegate>delegate;
+
 
 
 //玫瑰花
@@ -17,5 +30,8 @@
 
 //字
 - (void)showTheWordOnView:(UIView *)view;
+
+
+- (void)changeTheFlower:(UIColor *)color;
 
 @end
